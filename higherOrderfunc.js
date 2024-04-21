@@ -38,8 +38,39 @@ companies.forEach(function (company) {
   companyNames.push(company.name);
 });
 
-console.log(
-  companies.map(
-    (company) => `${company.name} [${company.start} - ${company.end}]`
-  )
-);
+// console.log(
+//   companies.map(
+//     (company) => `${company.name} [${company.start} - ${company.end}]`
+//   )
+// );
+
+const sortedCompanies = companies.sort(function (c1, c2) {
+  if (c1.start > c2.start) {
+    return 1;
+  } else {
+    return -1;
+  }
+});
+
+const sortedCompanies2 = companies.sort((c1, c2) => c1.start > c2.start);
+
+const sortAges = ages.sort(function (c1, c2) {
+  if (c1 > c2) {
+    return 1;
+  } else {
+    return -1;
+  }
+});
+
+const sortAges2 = ages.sort((a, b) => a - b);
+
+//sum of ages
+const totalAges = ages.reduce((total, age) => total + age, 0);
+
+//combined
+const combined = ages
+  .map((a) => a * 2)
+  .filter((a) => a >= 40)
+  .sort((a, b) => a - b)
+  .reduce((total, curent) => total + curent, 0);
+console.log(combined);

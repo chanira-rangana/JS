@@ -41,5 +41,4 @@ function reverseInt(int) {
 }
 
 // console.log(reverseInt(566));
-
 console.log("chanira".toUpperCase());
