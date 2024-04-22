@@ -1,0 +1,204 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <title>Scroll to the top of the page with jQuery</title>
+
+    <style>
+        #nonSelected {
+            
+            width: 180px;
+            height: 180px;
+            background-color: #884333;
+            border-width: 1px;
+            border-style: dotted;
+            border-color: black;
+            padding: 10px;
+        }
+
+        #selected {
+           
+            width: 180px;
+            height: 180px;
+            background-color: #498933;
+            border-width: 1px;
+            border-style: dotted;
+            border-color: black;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <p>jquery</p>
+    <a href='#top'>Go Top</a>
+
+    <div>
+        <input id="accept" name="accept" type="checkbox" value="y" />I accept<br>
+        <input id="submitbtn" disabled="disabled" name="Submit" type="button" value="Submit" />
+    </div>
+
+    <!-- hide images if it is given error -->
+    <a href="https://www.w3resource.com">
+        <img src="https://www.w3resource.com/images/w3resource-logo.png" alt="w3resource logo" width="150" height="78"
+            onerror='$(this).hide();' />
+    </a>
+
+    <p>jQuery <span class="blink">Exercises</span> and Solution</p>
+
+
+    <div class="table_style">
+        <table id="table1">
+            <tr>
+                <th>Student Name</th>
+                <th>Marks in Science</th>
+            </tr>
+            <tr>
+                <td>Janet</td>
+                <td>85.00</td>
+            </tr>
+            <tr>
+                <td>David</td>
+                <td>92.00</td>
+            </tr>
+            <tr>
+                <td>Arthur</td>
+                <td>79.00</td>
+            </tr>
+            <tr>
+                <td>Bill</td>
+                <td>82.00</td>
+            </tr>
+        </table>
+    </div>
+        <a class="printPage" href="#">Print</a>
+
+        <textarea id="textarea" maxlength="15"></textarea>
+        <span id="rchars">15</span> Character(s) Remaining
+
+        <div id="bold-text">
+            <p>PHP Exercises</p>
+            <p>Python Exercises</p>
+            <p>JavaScript Exercises</p>
+            <p>jQuery Exercises</p>
+        </div>
+
+        <div class="">
+            <div id="nonSelected">
+                <!--Declaring BUTTON TAGS -->
+                <button id="btnDefault" onclick="moveButton(this)" type="button">Button1</button>
+                <button id="btnPrimary" onclick="moveButton(this)" type="button">Button2</button>
+                <button id="btnDanger" onclick="moveButton(this)" type="button">Button3</button>
+            </div>
+            <div id="selected">
+            </div>
+        </div>
+        
+        <div id="divSelect">
+
+        </div>
+
+        <div id="ul-container">
+            <input type="button" value="Click to add new li element" onclick="new_element()" />
+            <ol>
+                <li><a href="https://www.w3resource.com/python/python-tutorial.php">Python</a></li>
+                <li><a href="https://www.w3resoxurce.com/php/php-home.php">PHP</a></li>
+            </ol>
+        </div>
+
+        <script>
+            //scroll to top
+            $("a[href='#top']").click(function () {
+                $("body").animate({ scrollTop: 0 }, "slow")
+            })
+
+            //disable right click menu
+            $(document).on("contextmenu", function (e) {
+                e.preventDefault();
+            });
+
+            //disable enable submit button
+            $("#accept").click(function () {
+                if ($("#submitbtn").is(":disabled")) {
+                    $("#submitbtn").removeAttr("disabled")
+                } else {
+                    $("#submitbtn").attr("disabled", "disabled")
+                }
+            });
+
+            //6  blink text
+            function blink_text() {
+                $('.blink').fadeIn("slow").fadeOut("slow");
+            }
+            setInterval(blink_text, 1000);
+
+
+            $("#table1 tr:odd").css({ "background-color": 'crimson', 'color': 'white' });
+
+            $('a.printPage').click(function () {
+                window.print();
+            });
+
+
+            var maxChar = $("#textarea").attr("maxlength");
+            $("#textarea").keyup(function () {
+                $("#rchars").html(maxChar - $(this).val().length)
+            })
+
+            $("#bold-text p").each(function () {
+                var pdata = $(this);
+                pdata.html(pdata.text().replace(/(^\w+)/, '$1'));
+            });
+
+            function moveButton(ele) {
+                if ($(ele).parent().attr("id") == "nonSelected") {
+                    $(ele).detach().appendTo("#selected");
+                } else {
+                    $(ele).detach().appendTo("#nonSelected");
+                }
+            }
+
+            // Select values from a JSON object using jQuery. 
+            colors = { "color1": "Red", "color2": "Green", 'color3': "Blue" };
+
+            $.each(colors, function(key, value) {
+                $('#divSelect').append($("<option/>", {
+                    value: key,
+                    text: value
+                }));
+            })
+            function new_element(){
+                $("#ul-container ol").append("<li>Java</li>")
+            }
+        </script>
+</body>
