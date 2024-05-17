@@ -1,0 +1,44 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="accordion">
+    <div class="accordion-header">Section 1</div>
+    <div class="accordion-content">Conte,nt for Section 1</div>
+    <div class="accordion-header">Section 2</div>
+    <div class="accordion-content">Content for Section 2</div>
+    <!-- Add more sections as needed -->
+</div>
+
+<form id="myForm" novalidate>
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <button type="submit">Submit</button>
+</form>
+<div id="error-message" style="color: red;"></div>
+
+<div id="quote"></div>
+<button id="get-quote">Get Quote</button>
+
+<script>
+    // $(document).on("click",".accordion-header",function(){
+    //     $(this).next(".accordion-content").slideToggle(); 
+    // });
+
+    $(".accordion-header").click(function () {
+        $(this).next(".accordion-content").slideToggle();
+    });
+
+    $("#myForm").submit(function () {
+        if ($("#name").val() === "" || $("#email").val() === "") {
+            $("#error-message").text("Please fill out all fields.");
+            event.preventDefault();
+        }
+    });
+    $("#get-quote").click(function(){
+        $.ajax({
+            url : "https://api.quotable.io/random",
+            success : function(res){
+                $("#quote").html(res.content + " - " + res.author)
+            }
+        })
+    })
+</script>
